@@ -131,8 +131,12 @@ public class ServletDemo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        String path = req.getServletContext().getContextPath();
+        System.out.println("项目名称："+path);
         String requestURI = req.getRequestURI();
-        System.out.println("requestURI: "+ requestURI);
+        System.out.println("requestURI-1: "+ requestURI);
+        requestURI = requestURI.replace(path,"");
+        System.out.println("requestURI-2: "+ requestURI);
         Method method = methodMap.get(requestURI);
         if(method == null){
             return;
@@ -183,4 +187,5 @@ public class ServletDemo extends HttpServlet {
             e.printStackTrace();
         }
     }
+
 }
